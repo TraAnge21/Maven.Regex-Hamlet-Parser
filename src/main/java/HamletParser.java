@@ -1,5 +1,8 @@
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Formatter;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -21,18 +24,18 @@ public class HamletParser {
         File file = new File(classLoader.getResource("hamlet.txt").getFile());
         StringBuilder result = new StringBuilder("");
 
-        try(Scanner scanner = new Scanner(file)){
-            while(scanner.hasNextLine()){
-                String line = scanner.nextLine();
-                result.append(line).append("\n");
-            }
+            try ( Scanner scanner = new Scanner(file)) {
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    result.append(line).append("\n");
+                }
 
-            scanner.close();
-        }catch(IOException e){
+            } catch(IOException e){
             e.printStackTrace();
         }
 
         return result.toString();
+
     }
 
     public String getHamletData(){
@@ -43,18 +46,18 @@ public class HamletParser {
 
     // A method to find the nameToBeReplaced
 
-    public Boolean IsNameFound ( String nameTobeReplaced) {
+    public Boolean isNameFound ( String nameTobeReplaced) {
 
-        Pattern patternInText= Pattern.compile(nameTobeReplaced);
-        Matcher nameMatcher= patternInText.matcher(hamletData);
+        Pattern ptInText= Pattern.compile(nameTobeReplaced);
+        Matcher nameMatcher= ptInText.matcher(hamletData);
         return nameMatcher.find();
     }
 
     // A method to replace the nameToBeReplaced.
     public String replacement ( String firstName, String nameTobeReplaced) {
 
-        Pattern patternInText = Pattern.compile(firstName);
-        Matcher nameMatcher = patternInText.matcher(hamletData);
+        Pattern ptInText = Pattern.compile(firstName);
+        Matcher nameMatcher = ptInText.matcher(hamletData);
         return nameMatcher.replaceAll(nameTobeReplaced);
 
     }
@@ -62,9 +65,14 @@ public class HamletParser {
 
     // A method to write the file text containing the Hamlet.txt
 
+     public void fileWriting ( String hamletText) throws FileNotFoundException {
 
+        String textFileName = "hamlet.txt";
+        FileOutputStream outputStream = new FileOutputStream(textFileName);
+        Formatter formatter= new Formatter(outputStream);
+        formatter.format(hamletText);
 
-
+    }
 
 
 
