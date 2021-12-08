@@ -16,6 +16,23 @@ public class HamletParserTest {
         this.hamletText = hamletParser.getHamletData();
     }
 
+
+    @Test
+    public void testFindHoratio() {
+
+        Assert.assertTrue(hamletParser.isNameFound("Horatio"));
+
+    }
+
+    @Test
+    public void testFindHamlet() {
+
+        Assert.assertTrue(hamletParser.isNameFound("Hamlet"));
+
+
+    }
+
+
     @Test
     public void testChangeHamletToLeon() throws FileNotFoundException {
 
@@ -44,18 +61,5 @@ public class HamletParserTest {
 
     }
 
-    @Test
-    public void testFindHoratio() {
 
-        Assert.assertTrue(hamletParser.isNameFound("Horatio"));
-
-    }
-
-    @Test
-    public void testFindHamlet() {
-
-        Assert.assertTrue(hamletParser.isNameFound("Hamlet"));
-
-
-    }
 }
