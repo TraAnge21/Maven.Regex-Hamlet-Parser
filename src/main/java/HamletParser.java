@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by thook on 10/7/15.
@@ -10,6 +12,7 @@ public class HamletParser {
     private String hamletData;
 
     public HamletParser(){
+
         this.hamletData = loadFile();
     }
 
@@ -33,7 +36,37 @@ public class HamletParser {
     }
 
     public String getHamletData(){
+
         return hamletData;
     }
+
+
+    // A method to find the nameToBeReplaced
+
+    public Boolean IsNameFound ( String nameTobeReplaced) {
+
+        Pattern patternInText= Pattern.compile(nameTobeReplaced);
+        Matcher nameMatcher= patternInText.matcher(hamletData);
+        return nameMatcher.find();
+    }
+
+    // A method to replace the nameToBeReplaced.
+    public String replacement ( String firstName, String nameTobeReplaced) {
+
+        Pattern patternInText = Pattern.compile(firstName);
+        Matcher nameMatcher = patternInText.matcher(hamletData);
+        return nameMatcher.replaceAll(nameTobeReplaced);
+
+    }
+
+
+    // A method to write the file text containing the Hamlet.txt
+
+
+
+
+
+
+
 
 }
